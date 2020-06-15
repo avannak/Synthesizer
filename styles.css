@@ -156,6 +156,7 @@ background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, 
     transition: 0.9s;
     opacity: .9;
     
+    text-shadow:1px 1px 1px rgba(0, 0, 0, 0.363);
 }
 #title:hover{
     opacity: 1;
