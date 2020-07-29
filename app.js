@@ -60,42 +60,42 @@ var higheqslidertext = document.getElementById('highcontroltextvalue');
 //random linear gradient background button
 var rndbkgbutton = document.getElementById('randombkgbutton');
 
-rndbkgbutton.addEventListener('mouseup', function(){
+rndbkgbutton.addEventListener('mouseup', function () {
     console.log('rndmback is pressed');
     var c1 = {
         r: Math.floor(255),
-        g: Math.floor(35+Math.random()*220),
-        b: Math.floor(Math.random()*55)
-      };
-      var c2 = {
+        g: Math.floor(35 + Math.random() * 220),
+        b: Math.floor(Math.random() * 55)
+    };
+    var c2 = {
         r: Math.floor(255),
-        g: Math.floor(35+Math.random()*220),
-        b: Math.floor(Math.random()*85)
-      };
-  c1.rgb = 'rgb('+c1.r+','+c1.g+','+c1.b+')';
-  c2.rgb = 'rgb('+c2.r+','+c2.g+','+c2.b+')';
-  return 'radial-gradient(at top left, '+c1.rgb+', '+c2.rgb+')';
+        g: Math.floor(35 + Math.random() * 220),
+        b: Math.floor(Math.random() * 85)
+    };
+    c1.rgb = 'rgb(' + c1.r + ',' + c1.g + ',' + c1.b + ')';
+    c2.rgb = 'rgb(' + c2.r + ',' + c2.g + ',' + c2.b + ')';
+    return 'radial-gradient(at top left, ' + c1.rgb + ', ' + c2.rgb + ')';
 
 })
 function generate() {
 
-    var hexValues = ["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e"];
-    
+    var hexValues = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e"];
+
     function populate(a) {
-      for ( var i = 0; i < 6; i++ ) {
-        var x = Math.round( Math.random() * 14 );
-        var y = hexValues[x];
-        a += y;
-      }
-      return a;
+        for (var i = 0; i < 6; i++) {
+            var x = Math.round(Math.random() * 14);
+            var y = hexValues[x];
+            a += y;
+        }
+        return a;
     }
-    
+
     var newColor1 = populate('#');
     var newColor2 = populate('#');
-    var angle = Math.round( Math.random() * 360 );
-    
+    var angle = Math.round(Math.random() * 360);
+
     var gradient = "linear-gradient(" + angle + "deg, " + newColor1 + ", " + newColor2 + ")";
-    
+
     document.getElementById("container").style.background = gradient;
     document.getElementById("cloud").style.background = gradient;
     document.getElementById("randombkgbutton").style.background = gradient;
@@ -104,177 +104,175 @@ function generate() {
     document.getElementById("randombkgbutton").style.background = gradient;
 
 }
-pitchup.addEventListener('mouseup', function(){
-    if(octavecount >= 0){
+pitchup.addEventListener('mouseup', function () {
+    if (octavecount >= 0) {
         greaterthanzero = true;
     }
-    if(pitchcount >= 36){
+    if (pitchcount >= 36) {
         pitchcount = 36;
- 
+
     }
-    if(octavecount >= 3){
+    if (octavecount >= 3) {
         octavecount = 3;
     }
-    
-    
-    else{
-        
+
+
+    else {
+
         pitchcount += 12;
         octavecount++;
-        
-        
+
+
     }
     pitchvaluetext.innerHTML = 'pitch: ' + octavecount;
     console.log('greater than zero is ' + greaterthanzero);
-    
-       console.log(octavecount);
+
+    console.log(octavecount);
     console.log(pitchcount);
-pitchshift.pitch = pitchcount;
+    pitchshift.pitch = pitchcount;
 })
 
-pitchdown.addEventListener('mouseup', function(){
-    if(pitchcount <= -36){
+pitchdown.addEventListener('mouseup', function () {
+    if (pitchcount <= -36) {
         pitchcount = -36;
     }
-    if(octavecount <= -3){
+    if (octavecount <= -3) {
         octavecount = -3;
-    }else{
+    } else {
         pitchcount -= 12;
         octavecount--;
     }
     pitchvaluetext.innerHTML = 'pitch: ' + octavecount;
-       console.log(octavecount);
-    
-       
+    console.log(octavecount);
+
+
     console.log(pitchcount);
-pitchshift.pitch = pitchcount;
+    pitchshift.pitch = pitchcount;
 })
 
 
-volumeslider.addEventListener("mousemove", function(){
+volumeslider.addEventListener("mousemove", function () {
     var x = volumeslider.value;
     var max = 100;
     var min = 0;
     var max2 = 12;
     var min = -12;
-    
+
     var color = 'linear-gradient(90deg, rgb(117,252,117)' + ((x - (-12)) / (12 - (-12))
-    * (100 - 0) + 0) + '%, rgb(255, 0, 0)' + ((x - (-12)) / (12 - (-12))
-    * (100 - 0) + 0) + '%)';
-    
+        * (100 - 0) + 0) + '%, rgb(255, 0, 0)' + ((x - (-12)) / (12 - (-12))
+            * (100 - 0) + 0) + '%)';
+
     volumeslider.style.background = color;
 })
 
-reverbslider.oninput = function() {
+reverbslider.oninput = function () {
     var x = reverbslider.value;
     var conversion = ((x - 0) / (100 - 0))
-    * (1 - 0) + 0;
-    
+        * (1 - 0) + 0;
+
 
     var color = 'linear-gradient(90deg, rgb(117,252,117)' + x + '%, rgb(0, 0, 0)' + x + '%)';
-    
-     reverbslider.style.background = color;
+
+    reverbslider.style.background = color;
     reverbtext.innerHTML = this.value + '%';
     reverbslidervalue = this.value;
     reverb.wet.value = conversion;
     console.log("reverb value was " + x + ", now it is " + conversion);
     console.log(reverbslidervalue);
-    if(reverbslidervalue == 0){
+    if (reverbslidervalue == 0) {
         reverbtext.innerHTML = 'DRY';
     }
-    
+
 }
-delayslider.oninput = function() {
-    
+delayslider.oninput = function () {
+
     var x = delayslider.value;
     var conversion = ((x - 0) / (100 - 0))
-    * (1 - 0) + 0;
+        * (1 - 0) + 0;
     var color = 'linear-gradient(90deg, rgb(117,252,117)' + x + '%, rgb(0, 0, 0)' + x + '%)';
-    
-     delayslider.style.background = color;
+
+    delayslider.style.background = color;
     delaytext.innerHTML = this.value + '%';
     delayslidervalue = conversion;
     console.log("delayslidervalue is now " + conversion);
     feedbackDelay.wet.value = conversion;
-    if(delayslidervalue == 0){
+    if (delayslidervalue == 0) {
         delaytext.innerHTML = 'DRY';
     }
-    
+
 }
 
-volumeslider.oninput = function() {
+volumeslider.oninput = function () {
     volumetext.innerHTML = this.value + 'db';
     volumeslidervalue = this.value;
     console.log(volumeslidervalue);
     synth.volume.value = this.value;
-    if(volumeslidervalue <= -12){
-        
+    if (volumeslidervalue <= -12) {
+
         synth.volume.mute = true;
         volumeslidervalue = -100;
-        console.log("synth volume mute is "+ synth.volume.mute);
-        console.log("volume is now "+ volumeslidervalue);
-    }else{
+        console.log("synth volume mute is " + synth.volume.mute);
+        console.log("volume is now " + volumeslidervalue);
+    } else {
         synth.volume.mute = false;
-        console.log("synth volume mute is "+ synth.volume.mute);
+        console.log("synth volume mute is " + synth.volume.mute);
     }
 }
 
 
 
-function keyDown(e)
-{
-    
-    if(e.keyCode == 65){
+function keyDown(e) {
+
+    if (e.keyCode == 65) {
         synth.triggerAttack('C4')
         c4key.style.background = '#AFAFAF';
     }
-    if(e.keyCode == 87){
+    if (e.keyCode == 87) {
         synth.triggerAttack('Db4')
         db4key.style.background = '#4C4C4C';
     }
-    if(e.keyCode == 83){
+    if (e.keyCode == 83) {
         synth.triggerAttack('D4')
         d4key.style.background = '#AFAFAF';
     }
-    if(e.keyCode == 69){
+    if (e.keyCode == 69) {
         synth.triggerAttack('Eb4')
         eb4key.style.background = '#4C4C4C';
     }
-    if(e.keyCode == 68){
+    if (e.keyCode == 68) {
         synth.triggerAttack('E4')
         e4key.style.background = '#AFAFAF';
     }
-    if(e.keyCode == 70){
+    if (e.keyCode == 70) {
         synth.triggerAttack('F4')
         f4key.style.background = '#AFAFAF';
     }
-    if(e.keyCode == 84){
+    if (e.keyCode == 84) {
         synth.triggerAttack('Gb4')
         gb4key.style.background = '#4C4C4C';
     }
-    if(e.keyCode == 71){
+    if (e.keyCode == 71) {
         synth.triggerAttack('G4')
         g4key.style.background = '#AFAFAF';
     }
-    if(e.keyCode == 89){
+    if (e.keyCode == 89) {
         synth.triggerAttack('Ab4')
         ab4key.style.background = '#4C4C4C';
     }
-    if(e.keyCode == 72){
+    if (e.keyCode == 72) {
         synth.triggerAttack('A4')
         a4key.style.background = '#AFAFAF';
     }
-    if(e.keyCode == 85){
+    if (e.keyCode == 85) {
         synth.triggerAttack('Bb4')
         bb4key.style.background = '#4C4C4C';
     }
-    if(e.keyCode == 74){
+    if (e.keyCode == 74) {
         synth.triggerAttack('B4')
         b4key.style.background = '#AFAFAF';
     }
 }
-function keyUp()
-{
+function keyUp() {
     c4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';
     d4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';
     e4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';
@@ -287,8 +285,8 @@ function keyUp()
     gb4key.style.background = 'linear-gradient(#000000, #303030)';
     ab4key.style.background = 'linear-gradient(#000000, #303030)';
     bb4key.style.background = 'linear-gradient(#000000, #303030)';
-        synth.triggerRelease()
-  
+    synth.triggerRelease()
+
 }
 
 document.addEventListener("keydown", keyDown, true);
@@ -296,14 +294,14 @@ document.onkeyup = keyUp;
 
 
 c4key.addEventListener('mousedown', function () {
-synth.triggerAttack('C4')
-c4key.style.background = '#AFAFAF';
-  
+    synth.triggerAttack('C4')
+    c4key.style.background = '#AFAFAF';
+
 });
 c4key.addEventListener('mouseup', function () {
     synth.triggerRelease()
-c4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';
-      
+    c4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';
+
 });
 c4key.addEventListener('mouseleave', function () {
     synth.triggerRelease()
@@ -315,18 +313,18 @@ c4key.addEventListener('mouseleave', function () {
 
 
 db4key.addEventListener('mousedown', function () {
-synth.triggerAttack('Db4')
-db4key.style.background = 'linear-gradient(#3b3b3b, #696969)';
-  
+    synth.triggerAttack('Db4')
+    db4key.style.background = 'linear-gradient(#3b3b3b, #696969)';
+
 });
 db4key.addEventListener('mouseup', function () {
     synth.triggerRelease()
-db4key.style.background = 'linear-gradient(#000000, #303030)';
-      
+    db4key.style.background = 'linear-gradient(#000000, #303030)';
+
 });
 db4key.addEventListener('mouseleave', function () {
     synth.triggerRelease()
-db4key.style.background = 'linear-gradient(#000000, #303030)';    
+    db4key.style.background = 'linear-gradient(#000000, #303030)';
 });
 
 
@@ -334,39 +332,39 @@ db4key.style.background = 'linear-gradient(#000000, #303030)';
 d4key.addEventListener('mousedown', function () {
     synth.triggerAttack('D4')
     d4key.style.background = '#AFAFAF';
-    });
-    d4key.addEventListener('mouseup', function () {
-        synth.triggerRelease()
-    d4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';     
-    });
-    d4key.addEventListener('mouseleave', function () {
-        synth.triggerRelease()
-        d4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';
-          
-    });
+});
+d4key.addEventListener('mouseup', function () {
+    synth.triggerRelease()
+    d4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';
+});
+d4key.addEventListener('mouseleave', function () {
+    synth.triggerRelease()
+    d4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';
+
+});
 
 
 eb4key.addEventListener('mousedown', function () {
     synth.triggerAttack('Eb4')
     eb4key.style.background = 'linear-gradient(#3b3b3b, #696969)';
-    });
-    eb4key.addEventListener('mouseup', function () {
-        synth.triggerRelease()
-    eb4key.style.background = 'linear-gradient(#000000, #303030)';     
-    });
-    eb4key.addEventListener('mouseleave', function () {
-        synth.triggerRelease()
-    eb4key.style.background = 'linear-gradient(#000000, #303030)';      
-    });
+});
+eb4key.addEventListener('mouseup', function () {
+    synth.triggerRelease()
+    eb4key.style.background = 'linear-gradient(#000000, #303030)';
+});
+eb4key.addEventListener('mouseleave', function () {
+    synth.triggerRelease()
+    eb4key.style.background = 'linear-gradient(#000000, #303030)';
+});
 
 
 e4key.addEventListener('mousedown', function () {
-synth.triggerAttack('E4')
-e4key.style.background = '#AFAFAF';
+    synth.triggerAttack('E4')
+    e4key.style.background = '#AFAFAF';
 });
 e4key.addEventListener('mouseup', function () {
     synth.triggerRelease()
-    e4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';    
+    e4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';
 });
 e4key.addEventListener('mouseleave', function () {
     synth.triggerRelease()
@@ -377,97 +375,97 @@ e4key.addEventListener('mouseleave', function () {
 f4key.addEventListener('mousedown', function () {
     synth.triggerAttack('F4')
     f4key.style.background = '#AFAFAF';
-    });
-    f4key.addEventListener('mouseup', function () {
-        synth.triggerRelease()
-        f4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';    
-    });
-    f4key.addEventListener('mouseleave', function () {
-        synth.triggerRelease()
-        f4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';
-    });
+});
+f4key.addEventListener('mouseup', function () {
+    synth.triggerRelease()
+    f4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';
+});
+f4key.addEventListener('mouseleave', function () {
+    synth.triggerRelease()
+    f4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';
+});
 
 
 gb4key.addEventListener('mousedown', function () {
     synth.triggerAttack('Gb4')
     gb4key.style.background = 'linear-gradient(#3b3b3b, #696969)';
-    });
-    gb4key.addEventListener('mouseup', function () {
-        synth.triggerRelease()
-    gb4key.style.background = 'linear-gradient(#000000, #303030)';      
-    });
-    gb4key.addEventListener('mouseleave', function () {
-        synth.triggerRelease()
-    gb4key.style.background = 'linear-gradient(#000000, #303030)';      
-    });
+});
+gb4key.addEventListener('mouseup', function () {
+    synth.triggerRelease()
+    gb4key.style.background = 'linear-gradient(#000000, #303030)';
+});
+gb4key.addEventListener('mouseleave', function () {
+    synth.triggerRelease()
+    gb4key.style.background = 'linear-gradient(#000000, #303030)';
+});
 
 
 g4key.addEventListener('mousedown', function () {
     synth.triggerAttack('G4')
     g4key.style.background = '#AFAFAF';
-    });
-    g4key.addEventListener('mouseup', function () {
-        synth.triggerRelease()
-        g4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';    
-    });
-    g4key.addEventListener('mouseleave', function () {
-        synth.triggerRelease()
-        g4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';  
-    });
+});
+g4key.addEventListener('mouseup', function () {
+    synth.triggerRelease()
+    g4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';
+});
+g4key.addEventListener('mouseleave', function () {
+    synth.triggerRelease()
+    g4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';
+});
 
 
 ab4key.addEventListener('mousedown', function () {
     synth.triggerAttack('Ab4')
     ab4key.style.background = 'linear-gradient(#3b3b3b, #696969)';
-    });
-    ab4key.addEventListener('mouseup', function () {
-        synth.triggerRelease()
+});
+ab4key.addEventListener('mouseup', function () {
+    synth.triggerRelease()
     ab4key.style.background = 'linear-gradient(#000000, #303030)';
-    });
-    ab4key.addEventListener('mouseleave', function () {
-        synth.triggerRelease()
-    ab4key.style.background = 'linear-gradient(#000000, #303030)';    
-    });
+});
+ab4key.addEventListener('mouseleave', function () {
+    synth.triggerRelease()
+    ab4key.style.background = 'linear-gradient(#000000, #303030)';
+});
 
 
 a4key.addEventListener('mousedown', function () {
     synth.triggerAttack('A4')
     a4key.style.background = '#AFAFAF';
-    });
-    a4key.addEventListener('mouseup', function () {
-        synth.triggerRelease()
-        a4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';    
-    });
-    a4key.addEventListener('mouseleave', function () {
-        synth.triggerRelease()
-        a4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';  
-          
-    });
+});
+a4key.addEventListener('mouseup', function () {
+    synth.triggerRelease()
+    a4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';
+});
+a4key.addEventListener('mouseleave', function () {
+    synth.triggerRelease()
+    a4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';
+
+});
 
 
 bb4key.addEventListener('mousedown', function () {
     synth.triggerAttack('Bb4')
     bb4key.style.background = 'linear-gradient(#3b3b3b, #696969)';
-    });
-    bb4key.addEventListener('mouseup', function () {
-        synth.triggerRelease()
-    bb4key.style.background = 'linear-gradient(#000000, #303030)';    
-    });
-    bb4key.addEventListener('mouseleave', function () {
-        synth.triggerRelease()
-    bb4key.style.background = 'linear-gradient(#000000, #303030)';  
-    });
+});
+bb4key.addEventListener('mouseup', function () {
+    synth.triggerRelease()
+    bb4key.style.background = 'linear-gradient(#000000, #303030)';
+});
+bb4key.addEventListener('mouseleave', function () {
+    synth.triggerRelease()
+    bb4key.style.background = 'linear-gradient(#000000, #303030)';
+});
 
 
 b4key.addEventListener('mousedown', function () {
     synth.triggerAttack('B4')
     b4key.style.background = '#AFAFAF';
-    });
-    b4key.addEventListener('mouseup', function () {
-        synth.triggerRelease()
-        b4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';    
-    });
-    b4key.addEventListener('mouseleave', function () {
-        synth.triggerRelease()
-        b4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))'; 
-    });
+});
+b4key.addEventListener('mouseup', function () {
+    synth.triggerRelease()
+    b4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';
+});
+b4key.addEventListener('mouseleave', function () {
+    synth.triggerRelease()
+    b4key.style.background = 'linear-gradient(rgb(248, 248, 248), rgb(233, 233, 233))';
+});
