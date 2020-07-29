@@ -1,5 +1,5 @@
 {
-  "name": "Synthesizer",
+  "name": "synthesizer",
   "version": "1.0.0",
   "description": "Synthesizer",
   "main": "app.js",
@@ -20,5 +20,9 @@
   "homepage": "https://github.com/avannak/Synthesizer#readme",
   "dependencies": {
     "express": "^4.17.1"
-  }
+  },
+  "engines": {
+    "node": "12.18.3"
+  },
+  "devDependencies": {}
 }
