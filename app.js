@@ -294,6 +294,7 @@ function keyUp()
 document.addEventListener("keydown", keyDown, true);
 document.onkeyup = keyUp;
 
+
 c4key.addEventListener('mousedown', function () {
 synth.triggerAttack('C4')
 c4key.style.background = '#AFAFAF';
